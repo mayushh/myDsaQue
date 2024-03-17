@@ -33,12 +33,11 @@ int main(int argc, char const *argv[])
     int j = 0;
     string ans = "";
     vector<string>v;
-    sol(maze, n, i, j, ans, "",v);
-    for (int i = 0; i < v.size(); i++)
-    {
-        cout<<v[i]<<endl;
-    }
-    cout<<v.size();
+    string s = "abcd";
+    string a = "c";
+    int pos = s.find(a);
+    cout<<pos;
+
     
     return 0;
 }

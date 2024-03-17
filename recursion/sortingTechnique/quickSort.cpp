@@ -54,7 +54,7 @@ void quickSort(vector<int> &arr,int s , int e){
 int main(int argc, char const *argv[])
 {
     vector<int> arr = {8,1,20,30,6,5,60,5};
-    int n = 8;
+    int n = arr.size();
     int s = 0;
     quickSort(arr,s,n-1);
     for (int i = 0; i < n; i++)
