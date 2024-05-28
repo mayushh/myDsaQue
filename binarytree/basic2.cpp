@@ -14,19 +14,36 @@ public:
     }
 };
 
-node* buildTree(node* root){
-    int data;
-    cout << "enter" << endl;
-    cin >> data;
-    if(data == -1) {
-        return NULL;
+void buildLevelWiseTree(node* &root){
+   
+   
+   queue<node*>q;
+   cout<<"enter root node value"<<endl;
+   int data;
+   cin>>data;
+   root = new node(data);
+   q.push(root);
+   while(!q.empty()){   
+    node* temp = q.front();
+    q.pop();
+    int  leftdata;
+    cout<<"enter left data for "<<temp->data<<endl;
+    cin>>leftdata;
+    if (leftdata!=-1)
+    {
+        temp->left = new node(leftdata);
+        q.push(temp->left); 
     }
-    root = new node(data);
-    cout << "enter data for left node of the data " << data << endl;
-    root->left = buildTree(root->left);
-    cout << "enter data for right node of the data " << data << endl;
-    root->right = buildTree(root->right);
-    return root;
+    cout<<"enterright data for "<<temp->data<<endl;
+    int rightdata;
+    cin>>rightdata;
+    if(rightdata!=-1){
+        temp->right = new node(rightdata);
+        q.push(temp->right);
+    }
+
+   }
+    
 }
 
 void levelOrderTraversal(node* root){
@@ -58,7 +75,7 @@ void levelOrderTraversal(node* root){
 
 int main(){
     node* n = NULL;
-    n = buildTree(n);
+    buildLevelWiseTree(n);
     levelOrderTraversal(n);
     return 0;
 }

@@ -29,36 +29,28 @@ node* buildTree(node* root){
     return root;
 }
 
-void levelOrderTraversal(node* root){
-    if (root == NULL) {
-        return;
+void leftNRightPrint(node* root){
+    if(root == NULL)
+    return;
+    node*left = root->left;
+    node*right = root->right;
+        cout<<root->data<<" ";
+     if(left!=NULL)
+        leftNRightPrint(left);
+        
+     if(right!=NULL){
+        leftNRightPrint(right);
     }
 
-    queue<node*> q;
-    q.push(root);
-    q.push(NULL);
-    while(!q.empty()){
 
-        node* temp = q.front();
-        q.pop();
-        if(temp == NULL){
-                cout<<endl;
-                if(!q.empty())
-                q.push(NULL);
-        }
-        else{
-            cout<<temp->data<<" ";
-            if(temp->left)
-            q.push(temp->left);
-        if(temp->right)
-            q.push(temp->right);
-        }
-    }
+
+
 }
 
 int main(){
     node* n = NULL;
     n = buildTree(n);
-    levelOrderTraversal(n);
+    leftNRightPrint(n);
     return 0;
 }
+// 1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1 
