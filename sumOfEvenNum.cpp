@@ -21,8 +21,9 @@ int fact(int n){
 }
 int main()
 {
-    
-   int ans =  sumOfEven(50);
+    int a ;
+    cin>>a;
+   int ans =  sumOfEven(a);
    int factorial = fact(10);
    cout<<ans<<" "<<factorial;
 }
