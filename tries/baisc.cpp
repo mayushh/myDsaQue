@@ -132,7 +132,7 @@ public:
 int main()
 {
     Trie *t = new Trie();
-   t->insertWord("HELLO");
+    t->insertWord("HELLO");
     t->insertWord("BYEBYE");
     t->search("HELLO");
     t->insertWord("HELLOO");
