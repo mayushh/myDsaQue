@@ -1,4 +1,5 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 class TrieNode
 {
@@ -107,20 +108,35 @@ private:
         else
         return false;
     }
-    void printUtil(TrieNode*node,string s){
-        
+    void printUtil(TrieNode*node,vector<string>&v, string s){
         for(int i = 0;i < 26; i++){
             if(node->children[i]){
                 
                 s.push_back(node->children[i]->data);
                 if (node->children[i]->isTerminal)
                 {
-                    cout<<s<<endl;
+                    v.push_back(s);
                 }
-                printUtil(node->children[i],s);
+                printUtil(node->children[i],v,s);
                 s.pop_back();
             }
         }
+        
+        
+        
+    }
+    TrieNode* findWordHelper(TrieNode* node,string s){
+        if (s.length() == 0)
+        {
+            return node;
+        }
+        int index = s[0]-'A';
+        if (node->children[index] && node->children[index]->data == s[0])
+        {
+            return findWordHelper(node->children[index],s.substr(1));
+        }
+        else
+        return NULL;
     }
 
 public:
@@ -153,7 +169,18 @@ public:
     }
     void printAll(){
         string s = "";
-        printUtil(node,s);
+        vector<string>v;
+        printUtil(node,v,s);
+    }
+    void findWordWith(vector<string>&v, string s){
+        TrieNode* a = findWordHelper(node,s);
+       
+        if(a){
+            if(a->isTerminal)
+            v.push_back(s);
+            printUtil(a,v,s);
+        }
+        // v.push_back(s);
     }
 };
 int main()
@@ -165,12 +192,20 @@ int main()
     t->insertWord("HELLOO");
     t->search("HELLOO");
     t->removeWord("HELLOO");
-    // t->search("HELLO");
-    // t->search("HEL");
-    // t->removeWord("BYEB");
+    t->search("HELLO");
+    t->search("HEL");
+    t->removeWord("BYEB");
     t->insertWord("APPLE");
     t->insertWord("APPLE");
+    t->insertWord("APPLICATION");
     t->search("APP");
 
     t->printAll();
+    vector<string>v;
+    t->findWordWith(v,"APP");
+    for (int  i = 0; i < v.size(); i++)
+    {
+        cout<<v[i]<<" ";
+    }
+    
 }
